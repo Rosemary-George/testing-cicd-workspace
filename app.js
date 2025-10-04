@@ -38,7 +38,7 @@ app.post('/calculate', (req, res) => {
         case 'divide':
             result = calculator.divide(a, b);
             if (result === null) {
-                return res.status(400).json({ error: 'Division by zero' });
+                return res.status(400).json({ error: 'Division by zero not allowed' });
             }
             break;
         default:
