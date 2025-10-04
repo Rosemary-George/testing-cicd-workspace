@@ -1,15 +1,15 @@
 {
-  "name": "testing-cicd-workspace",
+  "name": "testing-cicd-workshop",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
     "start": "node app.js",
     "test": "jest",
+    "lint": "eslint *.js tests/*.js",
+    "lint:fix": "eslint *.js test/*.js --fix",
     "test:unit": "jest tests/unit.test.js",
     "test:integration": "jest tests/integration.test.js",
-    "test:coverage": "jest --coverage",
-    "lint": "eslint *.js tests/*.js",
-    "lint:fix": "eslint *.js tests/*.js"
+    "test:coverage": "jest --coverage"
   },
   "keywords": [],
   "author": "",
@@ -22,9 +22,9 @@
     "audit-ci": "^7.1.0",
     "eslint": "^8.57.1",
     "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-prettier": "^5.5.4",
     "jest": "^30.2.0",
-    "prettier": "^3.6.2",
+    "jest-html-reporter": "^4.3.0",
+    "jest-junit": "^16.0.0",
     "supertest": "^7.1.4"
   },
   "jest": {
@@ -32,18 +32,28 @@
     "collectCoverageFrom": [
       "*.js",
       "!node_modules/**"
+    ],
+    "reporters": [
+      "default",
+      [
+        "jest-html-reporter",
+        {
+          "pageTitle": "Calculator API Test Report",
+          "outputPath": "test-report.html"
+        }
+      ],
+      [
+        "jest-junit",
+        {
+          "outputDirectory": "test-results",
+          "outputName": "junit.xml"
+        }
+      ]
+    ],
+    "coverageReporters": [
+      "text",
+      "lcov",
+      "html"
     ]
-  },
-  "reporters": [
-    "default",
-    ["jest-html-reporter",{
-      "pageTitle": "Calculator API Test Report",
-      "outputPath": "test-report.html"
-    }],
-    ["jest-junit",{
-      "outputDirectory": "test-reuslts",
-      "outputName": "junit.xml"
-    }]
-  ],
-    "coverageReporters": ["texts","lcov","html"]
+  }
 }
