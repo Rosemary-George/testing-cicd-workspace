@@ -1,4 +1,8 @@
 const { calculator } = require('../app');
+ 
+afterAll((done) => {
+    server.close(done); // closes the server so Jest can exit
+});
 
 describe('Calculator Unit Tests', () => {
     describe('Addition', () => {
